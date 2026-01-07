@@ -1,10 +1,12 @@
 package com.tnt.autoplayer;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.math.BlockPos;
 
 public class AutoController {
 
     private AutoState state = AutoState.OFF;
+    private final DelayTimer delay = new DelayTimer();
 
     public void toggle() {
         if (state == AutoState.ACTIVE) {
@@ -18,9 +20,17 @@ public class AutoController {
 
     public void tick(MinecraftClient client) {
         if (state != AutoState.ACTIVE) return;
-        if (client.player == null) return;
+        if (client.player == null || client.world == null) return;
 
-        // logic auto akan ditambah di tahap berikutnya
+        if (!delay.ready()) return;
+
+        BlockPos feet = client.player.getBlockPos();
+        BlockPos below = feet.down();
+
+        if (client.world.isAir(below)) {
+            System.out.println("[TNT AutoPlayer] AIR detected at " + below);
+            delay.set(10); // 0.5 detik
+        }
     }
 
     public AutoState getState() {
