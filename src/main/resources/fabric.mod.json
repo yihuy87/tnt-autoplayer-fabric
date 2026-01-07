@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "tntautoplayer",
+  "version": "1.0.0",
+  "name": "TNT Auto Player",
+  "description": "Manual-style auto player for TNT challenges",
+  "authors": ["your-name"],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.tnt.autoplayer.AutoPlayerMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "1.21.x",
+    "fabric-api": "*"
+  }
+}
