@@ -28,9 +28,11 @@ public class AutoController {
         BlockPos below = feet.down();
 
         if (client.world.isAir(below)) {
-            System.out.println("[TNT AutoPlayer] AIR detected at " + below);
-            delay.set(10); // 0.5 detik
+            client.player.setPitch(80f); // lihat ke bawah
+            BlockPlacer.place(client, below);
+            delay.set(10);
         }
+
     }
 
     public AutoState getState() {
