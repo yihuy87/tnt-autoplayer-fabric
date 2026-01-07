@@ -9,6 +9,12 @@ public class AutoController {
     private final DelayTimer delay = new DelayTimer();
 
     public void toggle() {
+
+        if (state == AutoState.PAUSED) {
+            state = AutoState.ACTIVE;
+            return;
+        }
+
         if (state == AutoState.ACTIVE) {
             state = AutoState.OFF;
             System.out.println("[TNT AutoPlayer] OFF");
@@ -19,6 +25,11 @@ public class AutoController {
     }
 
     public void tick(MinecraftClient client) {
+        if (ManualOverrideDetector.detect(client)) {
+            state = AutoState.PAUSED;
+            return;
+        }
+
         if (state != AutoState.ACTIVE) return;
         if (client.player == null || client.world == null) return;
 
