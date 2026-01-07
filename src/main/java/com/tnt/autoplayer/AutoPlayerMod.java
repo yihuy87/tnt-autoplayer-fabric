@@ -6,14 +6,14 @@ import net.minecraft.client.MinecraftClient;
 
 public class AutoPlayerMod implements ClientModInitializer {
 
+    public static final AutoController CONTROLLER = new AutoController();
+
     @Override
     public void onInitializeClient() {
         System.out.println("[TNT AutoPlayer] Loaded");
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player == null) return;
-
-            // nanti logic auto player masuk di sini
+            CONTROLLER.tick(client);
         });
     }
 }
