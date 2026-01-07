@@ -9,6 +9,8 @@ public class AutoPlayerMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        AreaSelector.register();
+
         System.out.println("[TNT AutoPlayer] Loaded");
 
         Keybinds.register();
